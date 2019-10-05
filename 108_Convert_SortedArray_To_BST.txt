@@ -1,0 +1,15 @@
+TreeNode* sortedArrayToBST(vector<int>& nums) {
+        return sortedArrayToBSTRec(nums, 0, nums.size()-1);
+    }
+    
+    TreeNode* sortedArrayToBSTRec(vector<int>& nums, int left, int right) {
+        if (left > right) return nullptr;
+        
+        int mid = left+(right-left)/2;
+        
+        TreeNode* c = new TreeNode(nums[mid]);
+        c->left = sortedArrayToBSTRec(nums, left, mid-1);
+        c->right = sortedArrayToBSTRec(nums, mid+1, right);
+        
+        return c;
+    }
