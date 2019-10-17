@@ -1,0 +1,46 @@
+class Solution {
+public:
+    ListNode* FindIntersection(ListNode* longer, ListNode* shorter, int steps)
+    {
+        if(steps > 0)
+        {
+            while(steps != 0)
+            {     
+                longer = longer->next;
+                steps--;
+            }
+        }
+        while(longer != shorter)
+        {
+            longer = longer->next;
+            shorter = shorter->next;
+        }
+        return longer;
+    }
+    
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) 
+    {
+        ListNode* first = headA;
+        ListNode* second = headB;
+        int list1Length = 0;
+        int list2Length = 0;
+        
+        while(first != NULL)
+        {
+            first = first->next;
+            list1Length++;
+        }
+        
+        while(second != NULL)
+        {
+            second = second->next;
+            list2Length++;
+        }
+        first = headA;
+        second = headB;
+        if(list1Length > list2Length)
+            return FindIntersection(first, second, list1Length - list2Length);
+        else 
+            return FindIntersection(second, first, list2Length - list1Length);
+    }
+};
