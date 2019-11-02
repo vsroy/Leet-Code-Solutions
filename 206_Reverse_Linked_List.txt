@@ -1,0 +1,18 @@
+ListNode* Reverse(ListNode* head)
+{
+	if (head == NULL)
+		return NULL;
+	ListNode* next = NULL;
+	ListNode* current = head;
+	ListNode* prev;
+	
+	while (current != NULL)
+	{
+		prev = current->next;
+		current->next = next;
+		next = current;
+		current = prev;
+	}
+	head = next;
+	return head;
+}
